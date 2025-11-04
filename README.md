@@ -5,48 +5,52 @@ The Frisbee Tournament Management System is an online platform designed to simpl
 The system enables both team participants and organizers to interact seamlessly — from registration to approval and participation management — through an intuitive web interface.
 
 Key Features
-
+<br>
 For Teams
 <br>
-<li>
-Register your team and player details.
-Login with unique credentials.
-View team approval status.
-If rejected, edit or update team/player information and resubmit.
-If accepted, the team details become read-only to maintain data integrity.
-</li>
-
+<ul>
+  <li>Register your team and player details.</li>
+  <li>Login with unique credentials.</li>
+  <li>View team approval status.</li>
+  <li>If rejected, edit or update team/player information and resubmit.</li>
+  <li>If accepted, the team details become read-only to maintain data integrity.</li>
+  <li></li>
+  <br>
 For Organizers
-
-View all registered teams in one place.
-Approve or reject team applications.
-Monitor registration updates dynamically.
-
+<br>
+<ul>
+  <li>View all registered teams in one place.</li>
+  <li>Monitor registration updates dynamically.</li>
+</ul>
+<br>
 Tech Stack
-
-Frontend: HTML, CSS, JavaScript
-Backend: supabase (Hosted Backend as a Service)
-Database: supabase + local storage
-Version Control: Git & GitHub
+<br>
+<ul>
+  <li>Frontend: HTML, CSS, JavaScript</li>
+  <li>Backend: supabase (Hosted Backend as a Service)</li>
+  <li>Database: supabase + local storage</li>
+  <li>Version Control: Git & GitHub</li>
+</ul>
 
 Project Structure
-
-📦 Frisbee-Tournament-Management
-├── homepage.html
-├── index.html
-├── login.html
-├── organiser_dashboard.html
-├── organiser_dashboard_script.js
-├── organiser_dashboard_style.css
-├── organiser_login.html
-├── organiser_login_style.css
-├── register.html
-├── script.js
-├── style.css
-└── README.md
-
+<br>
+<ul>
+  <li>homepage.html</li>
+  <li>index.html</li>
+  <li>login.html</li>
+  <li>organiser_dashboard.html</li>
+  <li>organiser_dashboard_script.js</li>
+  <li>organiser_dashboard_style.css</li>
+  <li>organiser_login.html</li>
+  <li>organiser_login_style.css</li>
+  <li>register.html</li>
+  <li>script.js</li>
+  <li>style.css</li>
+  <li>README.md</li>
+</ul>
+<br>
 How It Works
-
+<br>
 1.Team Registration:
 Teams fill in player and team details and submit a registration form.
 
@@ -76,27 +80,29 @@ OR
 Use VS Code’s Live Server extension (recommended) to preview changes dynamically.
 
 UI Pages
+<br>
+<ul>
+  <li>🏠 Homepage: Landing page for users and organizers</li>
+  <li>📝 Register: Team registration form</li>
+  <li>🔐 Login: For team login and status checking</li>
+  <li>🧑‍💼 Organizer Login: For admin access</li>
+  <li>📊 Organizer Dashboard: Approve/reject registered teams</li>
+</ul>
 
-🏠 Homepage: Landing page for users and organizers
-📝 Register: Team registration form
-🔐 Login: For team login and status checking
-🧑‍💼 Organizer Login: For admin access
-📊 Organizer Dashboard: Approve/reject registered teams
 
 Future Enhancements
-
-Email notifications for acceptance/rejection
-Automated match scheduling
-Live scoreboard integration
-Player performance analytics
+<br>
+<li>Email notifications for acceptance/rejection</li>
+<li>Automated match scheduling</li>
+<li>Live scoreboard integration</li>
+<li>Player performance analytics</li>
 
 Team Members
-|Name                |	Role             |
-|....................|...................|
-|Anila Roy           (Frontend Developer |
-|Gouri Lakshmi MS	   |Backend Developer  |
-|Anjana Krishna V    |I/UX Designer      |
-|devanandana KP      |Database Manager   |
+<br>
+<ul>Anila Roy(Frontend Developer)</ul>
+<ul>Gouri Lakshmi M S (Backend Developer)</ul>  
+<ul>Anjana Krishna V (UI/UX Designer)</ul>      
+<ul>devanandana KP (Database Manager)</ul>  
 
 License
 
