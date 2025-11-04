@@ -1,0 +1,99 @@
+
+    body {
+      background-color: #0d1b2a;
+      
+    }
+
+    .container {
+      margin-top: 60px;
+    }
+    /* .navbar{
+      background-color: #415a77;
+    } */
+     /* .table-responsive{ 
+      background-color: #0d1b2a;
+     } */
+    .table-card {
+      background:#415a77;
+      border-radius: 15px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    h4{
+      color: white;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.9rem;
+    }
+    .logout-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .logout-btn:hover {
+      background-color: #b02a37;
+    }
+    .view-btn {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: all 1.0s ease;
+    }
+    .view-btn:hover {
+      background-color: #084298;
+      transform: translateY(-3px);
+      box-shadow: 0px 4px 10px rgba(13, 110, 253, 0.3);
+    }
+    .btn-add {
+      background-color: #198754;
+      color: white;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .btn-add:hover {
+      background-color: #157347;
+    }
+    .btn-edit {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+    .btn-edit:hover {
+      background-color: #084298;
+    }
+    .btn-delete {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+    .btn-delete:hover {
+      background-color: #b02a37;
+    }
+    .modal-header {
+      background-color: #415a77;
+      color: white;
+    }
+    
+    .modal-header .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+    }
