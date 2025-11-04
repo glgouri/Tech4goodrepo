@@ -67,7 +67,6 @@ Just open the main file (homepage.html) in your browser
 OR
 Use VS Code’s Live Server extension (recommended) to preview changes dynamically.</ul>
 <h3>UI Pages</h3>
-<br>
 <ul>
   <li>🏠 Homepage: Landing page for users and organizers</li>
   <li>📝 Register: Team registration form</li>
@@ -75,16 +74,14 @@ Use VS Code’s Live Server extension (recommended) to preview changes dynamical
   <li>🧑‍💼 Organizer Login: For admin access</li>
   <li>📊 Organizer Dashboard: Approve/reject registered teams</li>
 </ul>
-<br>
 <h3>Future Enhancements</h3>
-<br>
 <li>Email notifications for acceptance/rejection</li>
 <li>Automated match scheduling</li>
 <li>Live scoreboard integration</li>
 <li>Player performance analytics</li>
-<br>
+  <br>
 <h3>Team Members</h3>
-<br><h4><ul>Anila Roy(Frontend Developer)</h4></ul>
+<h4><ul>Anila Roy(Frontend Developer)</h4></ul>
 <ul><h4>Gouri Lakshmi M S (Backend Developer)</h4></ul>  
 <ul><h4>Anjana Krishna V (UI/UX Designer)</h4></ul>      
 <ul><h4>devanandana KP (Database Manager)</h4></ul>  
