@@ -14,7 +14,7 @@
 
   <style>
     body {
-      background-color: #0d1b2a;  /* Changed background color */
+      background-color: #0d1b2a;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -105,13 +105,36 @@
     .login-btn:hover {
       background-color: #218838;
     }
+
+    .register-text {
+      margin-top: 15px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .register-btn {
+      background-color: transparent;
+      border: 1px solid #28a745;
+      color: #28a745;
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 500;
+      margin-top: 5px;
+      transition: 0.3s;
+    }
+
+    .register-btn:hover {
+      background-color: #28a745;
+      color: white;
+    }
   </style>
 </head>
 
 <body>
   <!-- Frisbee Player Image (Top and Centered) -->
   <img
-    src="C:/Users/anjana/OneDrive/Desktop/FAIR BEELOGIN.HTML/pngtree-a-boy-throwing-frisbee-disk-clipart-on-transparent-background-png-image_13745118.png"
+    src="images/pngtree-a-boy-throwing-frisbee-disk-clipart-on-transparent-background-png-image_13745118"
     alt="Player"
     class="player-img"
   />
@@ -145,7 +168,11 @@
     </div>
 
     <input type="text" class="form-control" placeholder="Captcha Code" />
-    <button class="login-btn">Login</button>
+
+    <button class="login-btn" onclick="location.href='index.html'">Login</button>
+
+    <div class="register-text">If you are not registered?</div>
+    <button class="register-btn" onclick="location.href='register.html'">Register Now</button>
   </div>
 
   <script>
