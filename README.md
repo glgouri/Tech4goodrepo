@@ -5,8 +5,6 @@ The Frisbee Tournament Management System is an online platform designed to simpl
 The system enables both team participants and organizers to interact seamlessly — from registration to approval and participation management — through an intuitive web interface.
 
 <h2>Key Features</h2>
-<br>
-<br>
 <h3>For Teams</h3>
 <br>
 <ul>
@@ -17,23 +15,18 @@ The system enables both team participants and organizers to interact seamlessly 
   <li>If accepted, the team details become read-only to maintain data integrity.</li>
   <br>
 <h3>For Organizers</h3>
-<br>
 <ul>
   <li>View all registered teams in one place.</li>
   <li>Monitor registration updates dynamically.</li>
 </ul>
-<br>
 <h3>Tech Stack</h3>
-<br>
 <ul>
   <li>Frontend: HTML, CSS, JavaScript</li>
   <li>Backend: supabase (Hosted Backend as a Service)</li>
   <li>Database: supabase + local storage</li>
   <li>Version Control: Git & GitHub</li>
 </ul>
-<br>
 <h3>Project Structure</h3>
-<br>
 <ul>
   <li>homepage.html</li>
   <li>index.html</li>
@@ -48,9 +41,7 @@ The system enables both team participants and organizers to interact seamlessly 
   <li>style.css</li>
   <li>README.md</li>
 </ul>
-<br>
 <h3>How It Works</h3>
-<br>
 <h4>1.Team Registration:</h4>
 Teams fill in player and team details and submit a registration form.
 <br>
@@ -66,10 +57,8 @@ If Rejected → Team can view their status as Rejected and update team details.
 The data (team info, login credentials, and statuses) is stored in a simple database for persistence.
 <br>
 <h3>Setup Instructions</h3>
-<br> 
 <ul>Clone the repository
-If you want to work on it locally:
-git clone https://github.com/glgouri/Tech4goodrepo/.git</ul>
+If you want to work on it locally: git clone https://github.com/glgouri/Tech4goodrepo/.git</ul>
 <ul>Open the project
 You can open the folder directly in VS Code or any code editor.</ul>
 <ul>Run the project
@@ -95,11 +84,10 @@ Use VS Code’s Live Server extension (recommended) to preview changes dynamical
 <li>Player performance analytics</li>
 <br>
 <h3>Team Members</h3>
-<br>
-<ul>Anila Roy(Frontend Developer)</ul>
-<ul>Gouri Lakshmi M S (Backend Developer)</ul>  
-<ul>Anjana Krishna V (UI/UX Designer)</ul>      
-<ul>devanandana KP (Database Manager)</ul>  
+<br><h4><ul>Anila Roy(Frontend Developer)</h4></ul>
+<ul><h4>Gouri Lakshmi M S (Backend Developer)</h4></ul>  
+<ul><h4>Anjana Krishna V (UI/UX Designer)</h4></ul>      
+<ul><h4>devanandana KP (Database Manager)</h4></ul>  
 
 <h2>License</h2>
 
