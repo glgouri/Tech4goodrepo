@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Registration</title>
+  <style>
+    /* ---------- General Styles ---------- */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      padding: 40px 50px;
+      width: 100%;
+      max-width: 600px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #00c6ff;
+      letter-spacing: 1px;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    /* ---------- Form Styles ---------- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #f0f0f0;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 5px #00c6ff;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      transform: scale(1.05);
+    }
+
+    .back-btn {
+      background: #666;
+      margin-top: 10px;
+    }
+
+    .back-btn:hover {
+      background: #555;
+      transform: scale(1.05);
+    }
+
+    .output {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .output h2 {
+      color: #00c6ff;
+      margin-bottom: 10px;
+    }
+
+    .output ul {
+      list-style: disc;
+      margin-left: 20px;
+      color: #fff;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tournament Registration</h1>
+    <p>Fill in the details below to register your team for the upcoming tournament.</p>
+
+    <form id="tournamentForm">
+      <label for="tournament-name">Tournament Name:</label>
+      <input type="text" id="tournament-name" name="tournament-name" placeholder="Enter tournament name" required>
+
+      <label for="team-name">Team Name:</label>
+      <input type="text" id="team-name" name="team-name" placeholder="Enter your team name" required>
+
+      <label for="leader-name">Team Leader:</label>
+      <input type="text" id="leader-name" name="leader-name" placeholder="Enter leader's full name" required>
+
+      <label for="coach-name">Coach Name:</label>
+      <input type="text" id="coach-name" name="coach-name" placeholder="Enter coach's name" required>
+
+      <label for="coach-age">Coach Age:</label>
+      <input type="number" id="coach-age" name="coach-age" placeholder="Enter coach age" required>
+
+      <label for="coach-achievements">Coach Achievements:</label>
+      <textarea id="coach-achievements" name="coach-achievements" placeholder="List coach's achievements..."></textarea>
+
+      <label for="players">Player Names:</label>
+      <textarea id="players" name="players" placeholder="Enter all player names separated by commas or new lines" required></textarea>
+
+      <label for="player-ages">Player Ages:</label>
+      <textarea id="player-ages" name="player-ages" placeholder="Enter player ages (in same order as names)" required></textarea>
+
+      <label for="player-bmi">Player BMIs:</label>
+      <textarea id="player-bmi" name="player-bmi" placeholder="Enter player BMIs (in same order as names)" required></textarea>
+
+      <label for="phone">Contact Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter contact number" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Set a password" required>
+
+      <label for="remarks">Additional Remarks:</label>
+      <textarea id="remarks" name="remarks" placeholder="Any additional information..."></textarea>
+
+      <button type="submit">Register Now</button>
+      <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
+    </form>
+
+    <div class="output" id="output" style="display:none;">
+      <h2>Registered Player List</h2>
+      <ul id="playerList"></ul>
+    </div>
+
+    <div class="footer">© 2025 Tournament Docs. All rights reserved.</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('tournamentForm');
+    const output = document.getElementById('output');
+    const playerList = document.getElementById('playerList');
+
+    window.onload = function() {
+      const savedData = JSON.parse(localStorage.getItem('tournamentData'));
+      if (savedData) {
+        alert("Loaded saved registration data from local storage!");
+        console.log(savedData);
+      }
+    };
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const players = document.getElementById('players').value.split(/[\n,]+/).map(p => p.trim()).filter(p => p);
+      const ages = document.getElementById('player-ages').value.split(/[\n,]+/).map(p => p.trim()).filter(p => p);
+      const bmis = document.getElementById('player-bmi').value.split(/[\n,]+/).map(p => p.trim()).filter(p => p);
+
+      const data = {
+        tournamentName: document.getElementById('tournament-name').value,
+        teamName: document.getElementById('team-name').value,
+        leaderName: document.getElementById('leader-name').value,
+        coachName: document.getElementById('coach-name').value,
+        coachAge: document.getElementById('coach-age').value,
+        coachAchievements: document.getElementById('coach-achievements').value,
+        players: players.map((name, i) => ({
+          name: name,
+          age: ages[i] || 'N/A',
+          bmi: bmis[i] || 'N/A'
+        })),
+        phone: document.getElementById('phone').value,
+        password: document.getElementById('password').value,
+        remarks: document.getElementById('remarks').value
+      };
+
+      localStorage.setItem('tournamentData', JSON.stringify(data));
+
+      playerList.innerHTML = '';
+      data.players.forEach(player => {
+        const li = document.createElement('li');
+        li.textContent = `${player.name} (Age: ${player.age}, BMI: ${player.bmi})`;
+        playerList.appendChild(li);
+      });
+
+      output.style.display = 'block';
+      output.scrollIntoView({ behavior: 'smooth' });
+      alert("Registration saved successfully!");
+    });
+  </script>
+</body>
+</html>
