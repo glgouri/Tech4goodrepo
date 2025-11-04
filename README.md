@@ -89,11 +89,12 @@ Live scoreboard integration
 Player performance analytics
 
 Team Members
-Name               	Role
-Anila Roy           Frontend Developer
-Gouri Lakshmi MS	  Backend Developer
-Anjana Krishna V    UI/UX Designer
-devanandana KP     	Database Manager
+|Name                |	Role             |
+|....................|...................|
+|Anila Roy           |Frontend Developer |
+|Gouri Lakshmi MS	   |Backend Developer  |
+|Anjana Krishna V    |I/UX Designer      |
+|devanandana KP      |Database Manager   |
 
 License
 
