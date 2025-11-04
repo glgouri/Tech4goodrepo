@@ -7,12 +7,14 @@ The system enables both team participants and organizers to interact seamlessly 
 Key Features
 
 For Teams
-
+<br>
+<li>
 Register your team and player details.
 Login with unique credentials.
 View team approval status.
 If rejected, edit or update team/player information and resubmit.
 If accepted, the team details become read-only to maintain data integrity.
+</li>
 
 For Organizers
 
