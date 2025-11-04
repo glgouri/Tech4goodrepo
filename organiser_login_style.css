@@ -72,3 +72,19 @@ button:hover {
   background-color: #3a506b; /* lighter navy hover */
   transform: scale(1.03);
 }
+button[type="button"] {
+  margin-top: 0.6rem;
+  background: #1c2541;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button[type="button"]:hover {
+  opacity: 0.9;
+}
+
