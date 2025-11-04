@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tournament Registration</title>
   <style>
-    /* ---------- General Styles ---------- */
     body {
       font-family: "Poppins", sans-serif;
       background: linear-gradient(135deg, #141E30, #243B55);
@@ -17,48 +16,22 @@
       align-items: center;
       min-height: 100vh;
     }
-
     .container {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
       padding: 40px 50px;
       width: 100%;
-      max-width: 600px;
+      max-width: 650px;
       backdrop-filter: blur(10px);
-      transition: transform 0.3s ease-in-out;
     }
-
-    .container:hover {
-      transform: translateY(-5px);
-    }
-
     h1 {
       text-align: center;
       font-size: 2rem;
       margin-bottom: 20px;
       color: #00c6ff;
-      letter-spacing: 1px;
     }
-
-    p {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #ccc;
-    }
-
-    /* ---------- Form Styles ---------- */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    label {
-      font-weight: 600;
-      color: #f0f0f0;
-    }
-
+    label { font-weight: 600; color: #f0f0f0; }
     input, textarea {
       width: 100%;
       padding: 10px 15px;
@@ -70,17 +43,10 @@
       outline: none;
       transition: all 0.3s ease;
     }
-
     input:focus, textarea:focus {
       background: rgba(255, 255, 255, 0.25);
       box-shadow: 0 0 5px #00c6ff;
     }
-
-    textarea {
-      resize: none;
-      height: 80px;
-    }
-
     button {
       background: linear-gradient(90deg, #00c6ff, #0072ff);
       color: white;
@@ -92,161 +58,175 @@
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s;
     }
-
     button:hover {
       background: linear-gradient(90deg, #0072ff, #00c6ff);
       transform: scale(1.05);
     }
-
-    .back-btn {
-      background: #666;
-      margin-top: 10px;
-    }
-
-    .back-btn:hover {
-      background: #555;
-      transform: scale(1.05);
-    }
-
-    .output {
-      margin-top: 30px;
-      background: rgba(255, 255, 255, 0.15);
+    .player-list {
+      margin-top: 15px;
+      background: rgba(255,255,255,0.1);
       border-radius: 10px;
-      padding: 20px;
+      padding: 10px;
     }
-
-    .output h2 {
-      color: #00c6ff;
-      margin-bottom: 10px;
+    .player-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
     }
-
-    .output ul {
-      list-style: disc;
-      margin-left: 20px;
-      color: #fff;
+    .player-item:last-child { border-bottom: none; }
+    .player-item span { color: #fff; }
+    .player-item button {
+      background: #ff4d4d;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
     }
-
+    .player-item button:hover { background: #ff1a1a; }
+    .back-btn { background: #666; margin-top: 10px; }
+    .back-btn:hover { background: #555; }
     .footer {
       text-align: center;
       margin-top: 25px;
       font-size: 0.9rem;
       color: #aaa;
     }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 30px;
-      }
-      h1 {
-        font-size: 1.6rem;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Tournament Registration</h1>
-    <p>Fill in the details below to register your team for the upcoming tournament.</p>
-
     <form id="tournamentForm">
       <label for="tournament-name">Tournament Name:</label>
-      <input type="text" id="tournament-name" name="tournament-name" placeholder="Enter tournament name" required>
+      <input type="text" id="tournament-name" required>
 
       <label for="team-name">Team Name:</label>
-      <input type="text" id="team-name" name="team-name" placeholder="Enter your team name" required>
+      <input type="text" id="team-name" required>
 
       <label for="leader-name">Team Leader:</label>
-      <input type="text" id="leader-name" name="leader-name" placeholder="Enter leader's full name" required>
+      <input type="text" id="leader-name" required>
 
       <label for="coach-name">Coach Name:</label>
-      <input type="text" id="coach-name" name="coach-name" placeholder="Enter coach's name" required>
+      <input type="text" id="coach-name" required>
 
       <label for="coach-age">Coach Age:</label>
-      <input type="number" id="coach-age" name="coach-age" placeholder="Enter coach age" required>
+      <input type="number" id="coach-age" required>
 
       <label for="coach-achievements">Coach Achievements:</label>
-      <textarea id="coach-achievements" name="coach-achievements" placeholder="List coach's achievements..."></textarea>
+      <textarea id="coach-achievements" placeholder="List achievements..."></textarea>
 
-      <label for="players">Player Names:</label>
-      <textarea id="players" name="players" placeholder="Enter all player names separated by commas or new lines" required></textarea>
+      <!-- 🧩 Player Adding Section -->
+      <hr>
+      <h3 style="color:#00c6ff;">Add Players</h3>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="playerName" placeholder="Player Name" style="flex:1" />
+        <input type="number" id="playerAge" placeholder="Age" style="width:80px;" />
+        <input type="number" step="0.1" id="playerBMI" placeholder="BMI" style="width:80px;" />
+        <button type="button" id="addPlayerBtn" style="background:#28a745;">Add</button>
+      </div>
 
-      <label for="player-ages">Player Ages:</label>
-      <textarea id="player-ages" name="player-ages" placeholder="Enter player ages (in same order as names)" required></textarea>
+      <div class="player-list" id="playerList"></div>
 
-      <label for="player-bmi">Player BMIs:</label>
-      <textarea id="player-bmi" name="player-bmi" placeholder="Enter player BMIs (in same order as names)" required></textarea>
-
+      <hr>
       <label for="phone">Contact Number:</label>
-      <input type="tel" id="phone" name="phone" placeholder="Enter contact number" required>
+      <input type="tel" id="phone" required>
 
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="Set a password" required>
+      <input type="password" id="password" required>
 
       <label for="remarks">Additional Remarks:</label>
-      <textarea id="remarks" name="remarks" placeholder="Any additional information..."></textarea>
+      <textarea id="remarks" placeholder="Any additional info..."></textarea>
 
       <button type="submit">Register Now</button>
       <button type="button" class="back-btn" onclick="window.history.back()">Back</button>
     </form>
-
-    <div class="output" id="output" style="display:none;">
-      <h2>Registered Player List</h2>
-      <ul id="playerList"></ul>
-    </div>
 
     <div class="footer">© 2025 Tournament Docs. All rights reserved.</div>
   </div>
 
   <script>
     const form = document.getElementById('tournamentForm');
-    const output = document.getElementById('output');
-    const playerList = document.getElementById('playerList');
+    const playerListDiv = document.getElementById('playerList');
+    const addBtn = document.getElementById('addPlayerBtn');
 
-    window.onload = function() {
-      const savedData = JSON.parse(localStorage.getItem('tournamentData'));
-      if (savedData) {
-        alert("Loaded saved registration data from local storage!");
-        console.log(savedData);
+    let players = [];
+
+    addBtn.addEventListener('click', () => {
+      const name = document.getElementById('playerName').value.trim();
+      const age = document.getElementById('playerAge').value.trim();
+      const bmi = document.getElementById('playerBMI').value.trim();
+
+      if (!name || !age || !bmi) {
+        alert('Please fill all player fields!');
+        return;
       }
+
+      players.push({ name, age, bmi });
+      renderPlayers();
+
+      // clear fields
+      document.getElementById('playerName').value = '';
+      document.getElementById('playerAge').value = '';
+      document.getElementById('playerBMI').value = '';
+    });
+
+    function renderPlayers() {
+      playerListDiv.innerHTML = '';
+      players.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.classList.add('player-item');
+        div.innerHTML = `
+          <span>${i + 1}. ${p.name} (Age: ${p.age}, BMI: ${p.bmi})</span>
+          <button onclick="removePlayer(${i})">Remove</button>
+        `;
+        playerListDiv.appendChild(div);
+      });
+    }
+
+    window.removePlayer = function(index) {
+      players.splice(index, 1);
+      renderPlayers();
     };
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+   form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-      const players = document.getElementById('players').value.split(/[\n,]+/).map(p => p.trim()).filter(p => p);
-      const ages = document.getElementById('player-ages').value.split(/[\n,]+/).map(p => p.trim()).filter(p => p);
-      const bmis = document.getElementById('player-bmi').value.split(/[\n,]+/).map(p => p.trim()).filter(p => p);
+  if (players.length === 0) {
+    alert('Please add at least one player!');
+    return;
+  }
 
-      const data = {
-        tournamentName: document.getElementById('tournament-name').value,
-        teamName: document.getElementById('team-name').value,
-        leaderName: document.getElementById('leader-name').value,
-        coachName: document.getElementById('coach-name').value,
-        coachAge: document.getElementById('coach-age').value,
-        coachAchievements: document.getElementById('coach-achievements').value,
-        players: players.map((name, i) => ({
-          name: name,
-          age: ages[i] || 'N/A',
-          bmi: bmis[i] || 'N/A'
-        })),
-        phone: document.getElementById('phone').value,
-        password: document.getElementById('password').value,
-        remarks: document.getElementById('remarks').value
-      };
+  const data = {
+    tournamentName: document.getElementById('tournament-name').value,
+    teamName: document.getElementById('team-name').value,
+    leaderName: document.getElementById('leader-name').value,
+    coachName: document.getElementById('coach-name').value,
+    coachAge: document.getElementById('coach-age').value,
+    coachAchievements: document.getElementById('coach-achievements').value,
+    players,
+    phone: document.getElementById('phone').value,
+    password: document.getElementById('password').value,
+    remarks: document.getElementById('remarks').value,
+    status: "Pending",
+    matches: 0,
+    score: 0,
+    createdAt: new Date().toISOString()
+  };
 
-      localStorage.setItem('tournamentData', JSON.stringify(data));
+  let teams = JSON.parse(localStorage.getItem("teams")) || [];
+  teams.push(data);
+  localStorage.setItem("teams", JSON.stringify(teams));
 
-      playerList.innerHTML = '';
-      data.players.forEach(player => {
-        const li = document.createElement('li');
-        li.textContent = `${player.name} (Age: ${player.age}, BMI: ${player.bmi})`;
-        playerList.appendChild(li);
-      });
+  alert('✅ Registration successful! You can now log in.');
+  form.reset();
+  players = [];
+  renderPlayers();
+});
 
-      output.style.display = 'block';
-      output.scrollIntoView({ behavior: 'smooth' });
-      alert("Registration saved successfully!");
-    });
+// Example for registration page
+
+
   </script>
 </body>
 </html>

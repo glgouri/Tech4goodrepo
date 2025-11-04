@@ -23,13 +23,11 @@
       font-family: "Poppins", sans-serif;
     }
 
-    /* Top image */
     .player-img {
       width: 140px;
       margin-bottom: 10px;
     }
 
-    /* Login Card */
     .login-card {
       background: white;
       width: 400px;
@@ -112,7 +110,8 @@
       font-size: 15px;
     }
 
-    .register-btn {
+    .register-btn,
+    .home-btn {
       background-color: transparent;
       border: 1px solid #28a745;
       color: #28a745;
@@ -124,56 +123,31 @@
       transition: 0.3s;
     }
 
-    .register-btn:hover {
+    .register-btn:hover,
+    .home-btn:hover {
       background-color: #28a745;
       color: white;
     }
-
-	.home-btn {
-  background-color: transparent;
-  border: 1px solid #28a745;
-  color: #28a745;
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 500;
-  margin-top: 10px;
-  transition: 0.3s;
-}
-
-.home-btn:hover {
-  background-color: #0d6efd;
-  color: white;
-}
-
   </style>
 </head>
 
 <body>
-  <!-- Frisbee Player Image (Top and Centered) -->
-  
-
-  <!-- Login Card -->
   <div class="login-card">
-<img
-    src="images/pngtree-a-boy-throwing-frisbee-disk-clipart-on-transparent-background-png-image_13745118.png"
-    alt="Player"
-    class="player-img"
-height=100
-  />
+    <img
+      src="images/pngtree-a-boy-throwing-frisbee-disk-clipart-on-transparent-background-png-image_13745118.png"
+      alt="Player"
+      class="player-img"
+      height="100"
+    />
     <h3>Candidate Login</h3>
 
     <div class="input-group mb-3">
-      <span class="input-group-text">
-        <i class="bi bi-person-fill"></i>
-      </span>
-      <input type="text" class="form-control" placeholder="User Name" />
+      <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+      <input type="text" id="username" class="form-control" placeholder="User Name" />
     </div>
 
     <div class="input-group mb-3">
-      <span class="input-group-text">
-        <i class="bi bi-lock-fill"></i>
-      </span>
+      <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
       <input type="password" id="password" class="form-control" placeholder="Password" />
       <span class="input-group-text" onclick="togglePassword()" style="cursor: pointer;">
         <i class="bi bi-eye" id="toggleIcon"></i>
@@ -181,51 +155,79 @@ height=100
     </div>
 
     <div class="captcha-box">
-      <div id="captcha" class="captcha-code">AB12C</div>
+      <div id="captcha" class="captcha-code"></div>
       <button class="refresh-btn" onclick="generateCaptcha()" title="Reset Captcha">
         <i class="bi bi-arrow-clockwise"></i>
       </button>
     </div>
 
-    <input type="text" class="form-control" placeholder="Captcha Code" />
+    <input type="text" id="captchaInput" class="form-control" placeholder="Enter Captcha" />
 
-    <button class="login-btn" onclick="location.href='index.html'">Login</button>
+    <button class="login-btn" onclick="loginTeam()">Login</button>
 
     <div class="register-text">If you are not registered?</div>
-<button class="register-btn" onclick="location.href='register.html'">Register Now</button>
-
-<!-- ✅ New Homepage Button -->
-<button class="home-btn mt-2" onclick="location.href='homepage.html'">
-  Home
-</button>
-
+    <button class="register-btn" onclick="location.href='register.html'">Register Now</button>
+    <button class="home-btn mt-2" onclick="location.href='homepage.html'">Home</button>
   </div>
 
-  <script>
-    // Generate Random Captcha
-    function generateCaptcha() {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      let code = "";
-      for (let i = 0; i < 5; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      document.getElementById("captcha").innerText = code;
-    }
+<script>
+  function generateCaptcha() {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code = "";
+    for (let i = 0; i < 5; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+    document.getElementById("captcha").textContent = code;
+  }
 
-    // Show/Hide Password
-    function togglePassword() {
-      const password = document.getElementById("password");
-      const icon = document.getElementById("toggleIcon");
-      if (password.type === "password") {
-        password.type = "text";
-        icon.classList.replace("bi-eye", "bi-eye-slash");
-      } else {
-        password.type = "password";
-        icon.classList.replace("bi-eye-slash", "bi-eye");
-      }
+  function togglePassword() {
+    const pass = document.getElementById("password");
+    const icon = document.getElementById("toggleIcon");
+    if (pass.type === "password") {
+      pass.type = "text";
+      icon.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+      pass.type = "password";
+      icon.classList.replace("bi-eye-slash", "bi-eye");
     }
+  }
 
-    window.onload = generateCaptcha;
-  </script>
+  function loginTeam() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const captchaInput = document.getElementById("captchaInput").value.trim();
+  const captchaCode = document.getElementById("captcha").textContent.trim();
+
+  if (!username || !password || !captchaInput) {
+    alert("⚠️ Please fill in all fields (Name, Password, and Captcha).");
+    return;
+  }
+
+  if (captchaInput.toUpperCase() !== captchaCode.toUpperCase()) {
+    alert("❌ Invalid Captcha. Please try again.");
+    generateCaptcha();
+    document.getElementById("captchaInput").value = "";
+    return;
+  }
+
+  // 🧩 Get all registered teams from localStorage
+  const teams = JSON.parse(localStorage.getItem("teams")) || [];
+
+  // 🔍 Find the matching team by name & password
+  const found = teams.find(t => t.teamName === username && t.password === password);
+
+  if (found) {
+    // ✅ Store the *full team object* so dashboard can use it
+    localStorage.setItem("currentTeam", JSON.stringify(found));
+
+    alert(`✅ Welcome ${found.teamName}! Redirecting to your dashboard...`);
+    window.location.href = "index.html"; // Go to the Team Dashboard
+  } else {
+    alert("❌ Invalid team name or password.");
+  }
+}
+
+  // Generate captcha when page loads
+  window.onload = generateCaptcha;
+</script>
+
 </body>
 </html>
