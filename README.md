@@ -23,7 +23,7 @@ The system enables both team participants and organizers to interact seamlessly 
   <li>Monitor registration updates dynamically.</li>
 </ul>
 <br>
-Tech Stack
+<h3>Tech Stack</h3>
 <br>
 <ul>
   <li>Frontend: HTML, CSS, JavaScript</li>
@@ -32,7 +32,7 @@ Tech Stack
   <li>Version Control: Git & GitHub</li>
 </ul>
 <br>
-Project Structure
+<h3>Project Structure</h3>
 <br>
 <ul>
   <li>homepage.html</li>
@@ -49,23 +49,23 @@ Project Structure
   <li>README.md</li>
 </ul>
 <br>
-How It Works
+<h3>How It Works</h3>
 <br>
-1.Team Registration:
+<h4>1.Team Registration:</h4>
 Teams fill in player and team details and submit a registration form.
 <br>
-2.Organizer Review:
+<h4>2.Organizer Review:</h4>
 Organizers log in to review all submitted teams.
 They can accept or reject each team based on eligibility.
 <br>
-3.Team Dashboard:
+<h4>3.Team Dashboard:</h4>
 If Accepted → Team can view their status as Accepted (no edits allowed).
 If Rejected → Team can view their status as Rejected and update team details.
 <br>
-4.Data Storage:
+<h4>4.Data Storage:</h4>
 The data (team info, login credentials, and statuses) is stored in a simple database for persistence.
 <br>
-Setup Instructions
+<h3>Setup Instructions</h3>
 <br> 
 <ul>Clone the repository
 If you want to work on it locally:
@@ -77,7 +77,7 @@ Since this is a static front-end project:
 Just open the main file (homepage.html) in your browser
 OR
 Use VS Code’s Live Server extension (recommended) to preview changes dynamically.</ul>
-UI Pages
+<h3>UI Pages</h3>
 <br>
 <ul>
   <li>🏠 Homepage: Landing page for users and organizers</li>
@@ -87,23 +87,23 @@ UI Pages
   <li>📊 Organizer Dashboard: Approve/reject registered teams</li>
 </ul>
 <br>
-Future Enhancements
+<h3>Future Enhancements</h3>
 <br>
 <li>Email notifications for acceptance/rejection</li>
 <li>Automated match scheduling</li>
 <li>Live scoreboard integration</li>
 <li>Player performance analytics</li>
 <br>
-Team Members
+<h3>Team Members</h3>
 <br>
 <ul>Anila Roy(Frontend Developer)</ul>
 <ul>Gouri Lakshmi M S (Backend Developer)</ul>  
 <ul>Anjana Krishna V (UI/UX Designer)</ul>      
 <ul>devanandana KP (Database Manager)</ul>  
 
-License
+<h2>License</h2>
 
-This project is open-source and available under the MIT License
+<h3>This project is open-source and available under the MIT License</h3>
 
 
 
