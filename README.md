@@ -1,13 +1,13 @@
-Y - Ultimate Frisbee Tournament Management System
+<h1>Y - Ultimate Frisbee Tournament Management System</h1>
 
-Overview
+<h2>Overview</h2>
 The Frisbee Tournament Management System is an online platform designed to simplify and streamline the management of frisbee tournaments.
 The system enables both team participants and organizers to interact seamlessly — from registration to approval and participation management — through an intuitive web interface.
 
-Key Features
+<h2>Key Features</h2>
 <br>
 <br>
-For Teams
+<h3>For Teams</h3>
 <br>
 <ul>
   <li>Register your team and player details.</li>
@@ -16,7 +16,7 @@ For Teams
   <li>If rejected, edit or update team/player information and resubmit.</li>
   <li>If accepted, the team details become read-only to maintain data integrity.</li>
   <br>
-For Organizers
+<h3>For Organizers</h3>
 <br>
 <ul>
   <li>View all registered teams in one place.</li>
@@ -67,19 +67,16 @@ The data (team info, login credentials, and statuses) is stored in a simple data
 <br>
 Setup Instructions
 <br> 
-1. Clone the repository
+<ul>Clone the repository
 If you want to work on it locally:
-git clone https://github.com/glgouri/Tech4goodrepo/.git
-
-2. Open the project
-You can open the folder directly in VS Code or any code editor.
-
-3. Run the project
+git clone https://github.com/glgouri/Tech4goodrepo/.git</ul>
+<ul>Open the project
+You can open the folder directly in VS Code or any code editor.</ul>
+<ul>Run the project
 Since this is a static front-end project:
 Just open the main file (homepage.html) in your browser
 OR
-Use VS Code’s Live Server extension (recommended) to preview changes dynamically.
-
+Use VS Code’s Live Server extension (recommended) to preview changes dynamically.</ul>
 UI Pages
 <br>
 <ul>
@@ -90,15 +87,13 @@ UI Pages
   <li>📊 Organizer Dashboard: Approve/reject registered teams</li>
 </ul>
 <br>
-<br>
-<br>
 Future Enhancements
 <br>
 <li>Email notifications for acceptance/rejection</li>
 <li>Automated match scheduling</li>
 <li>Live scoreboard integration</li>
 <li>Player performance analytics</li>
-
+<br>
 Team Members
 <br>
 <ul>Anila Roy(Frontend Developer)</ul>
