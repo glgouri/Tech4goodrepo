@@ -25,8 +25,8 @@
 
     /* Top image */
     .player-img {
-      width: 180px;
-      margin-bottom: 20px;
+      width: 140px;
+      margin-bottom: 10px;
     }
 
     /* Login Card */
@@ -35,13 +35,13 @@
       width: 400px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      padding: 40px;
+      padding: 10px;
       text-align: center;
     }
 
     .login-card h3 {
       font-weight: 500;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       color: #333;
     }
 
@@ -55,7 +55,7 @@
       border: none;
       border-bottom: 1px solid #ccc;
       box-shadow: none;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .form-control:focus {
@@ -67,15 +67,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .captcha-code {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       letter-spacing: 4px;
       background-color: #ddd;
-      padding: 10px 20px;
+      padding: 10px 10px;
       border-radius: 4px;
       margin-right: 10px;
       color: #333;
@@ -86,7 +86,7 @@
     .refresh-btn {
       background: none;
       border: none;
-      font-size: 20px;
+      font-size: 10px;
       cursor: pointer;
       color: #555;
     }
@@ -107,7 +107,7 @@
     }
 
     .register-text {
-      margin-top: 15px;
+      margin-top: 10px;
       color: #555;
       font-size: 15px;
     }
@@ -128,19 +128,39 @@
       background-color: #28a745;
       color: white;
     }
+
+	.home-btn {
+  background-color: transparent;
+  border: 1px solid #28a745;
+  color: #28a745;
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
   </style>
 </head>
 
 <body>
   <!-- Frisbee Player Image (Top and Centered) -->
-  <img
-    src="images/pngtree-a-boy-throwing-frisbee-disk-clipart-on-transparent-background-png-image_13745118.png"
-    alt="Player"
-    class="player-img"
-  />
+  
 
   <!-- Login Card -->
   <div class="login-card">
+<img
+    src="images/pngtree-a-boy-throwing-frisbee-disk-clipart-on-transparent-background-png-image_13745118.png"
+    alt="Player"
+    class="player-img"
+height=100
+  />
     <h3>Candidate Login</h3>
 
     <div class="input-group mb-3">
@@ -172,7 +192,13 @@
     <button class="login-btn" onclick="location.href='index.html'">Login</button>
 
     <div class="register-text">If you are not registered?</div>
-    <button class="register-btn" onclick="location.href='register.html'">Register Now</button>
+<button class="register-btn" onclick="location.href='register.html'">Register Now</button>
+
+<!-- ✅ New Homepage Button -->
+<button class="home-btn mt-2" onclick="location.href='homepage.html'">
+  Home
+</button>
+
   </div>
 
   <script>
