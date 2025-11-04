@@ -31,7 +31,7 @@ Tech Stack
   <li>Database: supabase + local storage</li>
   <li>Version Control: Git & GitHub</li>
 </ul>
-
+<br>
 Project Structure
 <br>
 <ul>
@@ -53,22 +53,23 @@ How It Works
 <br>
 1.Team Registration:
 Teams fill in player and team details and submit a registration form.
-
+<br>
 2.Organizer Review:
 Organizers log in to review all submitted teams.
 They can accept or reject each team based on eligibility.
-
+<br>
 3.Team Dashboard:
 If Accepted → Team can view their status as Accepted (no edits allowed).
 If Rejected → Team can view their status as Rejected and update team details.
-
+<br>
 4.Data Storage:
 The data (team info, login credentials, and statuses) is stored in a simple database for persistence.
-
-Setup Instructions 
+<br>
+Setup Instructions
+<br> 
 1. Clone the repository
 If you want to work on it locally:
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/glgouri/Tech4goodrepo/.git
 
 2. Open the project
 You can open the folder directly in VS Code or any code editor.
