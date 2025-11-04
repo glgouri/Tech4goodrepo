@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizer Dashboard</title>
+  <link rel="stylesheet" href="organiser_dashboard_style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1>Organizer Dashboard</h1>
+    <nav>
+      <button class="nav-btn active" data-target="tournamentSection">Tournament Management</button>
+      <button class="nav-btn" data-target="coachingSection">Coaching Programme</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= TOURNAMENT MANAGEMENT ================= -->
+    <section id="tournamentSection" class="section active">
+      <h2 class="section-title">Tournament Management</h2>
+      <div class="card-container">
+
+<!-- Team Approval -->
+<div class="card team-approval">
+  <h3>Team Approval</h3>
+
+  <div class="team-approval-grid">
+    <!-- LEFT: Spot Registration -->
+    <div class="spot-registration">
+      <h4>Spot Registration</h4>
+      <form id="teamForm" class="stack">
+        <input id="teamNameInput" placeholder="Team Name" />
+        <input id="teamCoachInput" placeholder="Coach Name" />
+        <input id="teamContactInput" placeholder="Contact Number" />
+
+        <h5>Add Player</h5>
+        <div id="playerInputs" class="stack">
+          <input id="playerNameInput" placeholder="Player Name" />
+          <input id="playerAgeInput" type="number" placeholder="Age" />
+          <input id="playerBmiInput" type="number" step="0.1" placeholder="BMI" />
+          <button type="button" id="addPlayerBtn" class="btn btn-green">Add Player</button>
+        </div>
+
+        <ul id="playerList" class="compact-list"></ul>
+
+        <div class="row">
+          <button type="submit" class="btn btn-blue">Submit Team</button>
+          <button type="button" id="clearTeamForm" class="btn btn-gray">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RIGHT: Registered Teams -->
+    <div class="registered-teams">
+      <h4>Registered Teams</h4>
+      <ul id="teamList" class="compact-list"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modalOverlay" class="modal-overlay hidden">
+  <div class="modal-card">
+    <button id="modalClose" class="modal-close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+
+
+
+        <!-- Match Scheduling -->
+        <div class="card">
+          <h3>Match Scheduling</h3>
+          <form id="matchForm" class="stack">
+            <select id="teamDropdown"></select>
+            <input id="opponentInput" placeholder="Opponent team" />
+            <input id="matchTimeInput" placeholder="Match time / venue" />
+            <div class="row">
+              <button type="submit" class="btn btn-blue">Schedule Match</button>
+              <button type="button" id="clearMatchForm" class="btn btn-gray">Clear</button>
+            </div>
+          </form>
+          <ul id="matchList" class="compact-list"></ul>
+        </div>
+
+        <!-- Live Scores -->
+        <div class="card">
+          <h3>Live Scores</h3>
+          <form id="scoreForm" class="stack">
+            <select id="scoreTeamDropdown"></select>
+            <input id="scoreValueInput" type="number" min="0" placeholder="Score" />
+            <div class="row">
+              <button type="submit" class="btn btn-blue">Update Score</button>
+              <button type="button" id="resetScoresBtn" class="btn btn-red">Reset Scores</button>
+            </div>
+          </form>
+          <div id="scoreboard"></div>
+        </div>
+
+        <!-- Spirit Leaderboard -->
+        <div class="card">
+          <h3>Spirit Leaderboard</h3>
+          <form id="spiritForm" class="stack">
+            <select id="spiritTeamDropdown"></select>
+            <input id="spiritPointsInput" type="number" min="0" placeholder="Points to add" />
+            <div class="row">
+              <button type="submit" class="btn btn-green">Add Points</button>
+              <button type="button" id="resetSpiritBtn" class="btn btn-gray">Reset</button>
+            </div>
+          </form>
+          <ul id="leaderboard" class="compact-list"></ul>
+        </div>
+
+        <!-- Announcements -->
+        <div class="card">
+          <h3>Announcements</h3>
+          <form id="announcementForm" class="stack">
+            <textarea id="announcementText" placeholder="Write announcement..."></textarea>
+            <div class="row">
+              <button type="submit" class="btn btn-blue">Post</button>
+              <button type="button" id="clearAnnouncements" class="btn btn-gray">Clear All</button>
+            </div>
+          </form>
+          <ul id="announcementList" class="compact-list"></ul>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="card">
+          <h3>Photo Gallery</h3>
+          <input id="photoUpload" type="file" accept="image/*" />
+          <div class="row">
+            <button id="uploadPhotoBtn" class="btn btn-blue">Upload</button>
+            <button id="clearGalleryBtn" class="btn btn-gray">Clear</button>
+          </div>
+          <div id="gallery" class="gallery-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COACHING PROGRAMME ================= -->
+    <section id="coachingSection" class="section">
+      <h2 class="section-title">Coaching Programme Management</h2>
+      <div class="card-container">
+
+        <div class="card">
+          <h3>Child Profiles & Attendance</h3>
+          <form id="childForm" class="stack">
+            <input id="childName" placeholder="Child Name" />
+            <div class="row">
+              <button type="submit" class="btn btn-blue">Add Child</button>
+              <button type="button" id="clearChildForm" class="btn btn-gray">Clear</button>
+            </div>
+          </form>
+          <ul id="childList" class="compact-list"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Home Visits & LSAS</h3>
+          <form id="visitForm" class="stack">
+            <textarea id="visitNotes" placeholder="Enter visit details or LSAS notes..."></textarea>
+            <div class="row">
+              <button type="submit" class="btn btn-blue">Save Visit</button>
+              <button type="button" id="clearVisitNotes" class="btn btn-gray">Clear</button>
+            </div>
+          </form>
+          <ul id="visitList" class="compact-list"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Coach Sessions & Workload</h3>
+          <form id="sessionForm" class="stack">
+            <input id="coachName" placeholder="Coach Name" />
+            <input id="sessionDetails" placeholder="Session Details" />
+            <div class="row">
+              <button type="submit" class="btn btn-blue">Add Session</button>
+              <button type="button" id="clearSessionForm" class="btn btn-gray">Clear</button>
+            </div>
+          </form>
+          <ul id="sessionList" class="compact-list"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Participation & Impact Reports</h3>
+          <button id="generateReport" class="btn btn-blue">Generate Report</button>
+          <pre id="reportOutput"></pre>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="organiser_dashboard_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+:root {
+  --navy-bg:#162036;       /* softer navy blue background */
+  --card-bg:#24324d;       /* slightly lighter navy for cards */
+  --indigo:#3b82f6;        /* blue for highlights/buttons */
+  --muted:#a7b2c7;         /* muted text */
+  --ivory:#e2e8f0;         /* base text */
+  --char:#f8fafc;          /* main text */
+  --success:#22c55e;       /* green */
+  --danger:#ef4444;        /* red */
+  --gray-btn:#475569;      /* gray */
+}
+
+
+/* -------- GLOBAL -------- */
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body {
+  background:var(--navy-bg);
+  color:var(--ivory);
+  line-height:1.6;
+}
+
+/* -------- NAVBAR -------- */
+.navbar {
+  background:#1e293b;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 1.5rem;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.navbar h1 {
+  color:var(--indigo);
+  font-size:1.25rem;
+  font-weight:700;
+}
+
+.nav-btn {
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:.5rem .8rem;
+  background:none;
+  color:var(--ivory);
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.nav-btn:hover {
+  background:#334155;
+}
+
+.nav-btn.active {
+  background:var(--indigo);
+  color:#fff;
+}
+
+/* -------- SECTIONS -------- */
+.section {
+  display:none;
+  padding:1rem;
+  animation:fadeIn .3s ease;
+}
+
+.section.active { display:block; }
+
+.section-title {
+  font-size:1.2rem;
+  color:var(--ivory);
+  border-left:4px solid var(--indigo);
+  padding-left:.5rem;
+  margin-bottom:.5rem;
+}
+
+/* -------- DASHBOARD CARD LAYOUT -------- */
+/* Ensure cards fill grid smartly */
+.card-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* left wider for team approval */
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Team Approval spans full left column */
+.card.team-approval {
+  grid-column: 1;
+  grid-row: 1 / span 2; /* make it taller if needed */
+}
+
+/* Match Scheduling + Announcements stack on right */
+.card.match-scheduling {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.card.announcements {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+
+@media (max-width: 1100px) {
+  .card.team-approval {
+    grid-column: span 1;
+  }
+}
+
+/* -------- CARD DESIGN -------- */
+.card {
+  background:var(--card-bg);
+  border-radius:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.25);
+  padding:1.2rem;
+}
+
+
+
+.card h3 {
+  color:var(--indigo);
+  margin-bottom:.8rem;
+  font-weight:600;
+}
+
+/* -------- INPUTS / BUTTONS -------- */
+.stack>* { margin-bottom:.6rem; }
+
+input, select, textarea {
+  width:100%;
+  padding:.5rem;
+  background:#0f172a;
+  border:1px solid #334155;
+  border-radius:6px;
+  color:var(--ivory);
+  font-size:.95rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline:none;
+  border-color:var(--indigo);
+}
+
+button {
+  border:none;
+  border-radius:6px;
+  padding:.55rem .9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.btn-blue { background:var(--indigo); color:#fff; }
+.btn-green { background:var(--success); color:#fff; }
+.btn-red { background:var(--danger); color:#fff; }
+.btn-gray { background:var(--gray-btn); color:#fff; margin-top:3px; }
+
+button:hover {
+  opacity:0.9;
+}
+
+/* -------- LISTS -------- */
+.compact-list {
+  list-style:none;
+  margin-top:.5rem;
+}
+
+.compact-list li {
+  background:#0f172a;
+  color:var(--ivory);
+  padding:.6rem;
+  border-radius:8px;
+  margin-bottom:.4rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border:1px solid #1e293b;
+}
+
+.action-group { display:flex; gap:.4rem; }
+
+/* -------- GALLERY -------- */
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:.5rem;
+}
+
+.gallery-grid img {
+  width:100%;
+  border-radius:8px;
+  object-fit:cover;
+  border:2px solid #334155;
+}
+
+/* -------- MODAL -------- */
+.modal-overlay {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.modal-card {
+  background:#1e293b;
+  padding:1rem;
+  border-radius:10px;
+  max-width:500px;
+  width:90%;
+  position:relative;
+  color:var(--ivory);
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+}
+
+.modal-close {
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:none;
+  border:none;
+  font-size:1.2rem;
+  color:var(--ivory);
+  cursor:pointer;
+}
+
+.hidden { display:none; }
+
+/* -------- ANIMATIONS -------- */
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(6px); }
+  to { opacity:1; transform:none; }
+}
+
+/* -------- PLAYER TABLE -------- */
+.player-table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:0.5rem;
+  color:var(--ivory);
+}
+
+.player-table th, .player-table td {
+  border:1px solid #334155;
+  padding:6px 8px;
+  text-align:left;
+}
+
+.player-table th {
+  background:#0f172a;
+  color:var(--muted);
+}
+
+/* -------- TEAM APPROVAL INNER LAYOUT -------- */
+.team-approval-grid {
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap:1rem;
+}
+
+.spot-registration, .registered-teams {
+  background:#1e293b;
+  border:1px solid #334155;
+  border-radius:10px;
+  padding:1.5rem;
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+
+.spot-registration h4,
+.registered-teams h4 {
+  color:var(--indigo);
+  margin-bottom:0.6rem;
+  font-size:1.1rem;
+}
+
+.spot-registration form input,
+.spot-registration form button {
+  width:100%;
+}
+
+.registered-teams ul {
+  max-height:480px;
+  overflow-y:auto;
+  padding-right:0.5rem;
+}
+
+/* Scrollbar styling */
+.registered-teams ul::-webkit-scrollbar {
+  width:6px;
+}
+.registered-teams ul::-webkit-scrollbar-thumb {
+  background:#475569;
+  border-radius:4px;
+}
