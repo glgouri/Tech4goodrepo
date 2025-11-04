@@ -1,18 +1,29 @@
-const STORAGE_KEY = "organizer_dashboard_v3";
+const STORAGE_KEY = "organizer_dashboard_v4";
 
+// ========== Local Storage Helper ==========
 const storage = {
   get(key, fallback = []) {
-    return JSON.parse(localStorage.getItem(`${STORAGE_KEY}_${key}`)) || fallback;
+    try {
+      return JSON.parse(localStorage.getItem(`${STORAGE_KEY}_${key}`)) || fallback;
+    } catch {
+      return fallback;
+    }
   },
   set(key, value) {
     localStorage.setItem(`${STORAGE_KEY}_${key}`, JSON.stringify(value));
   },
+  clear() {
+    Object.keys(localStorage)
+      .filter(k => k.startsWith(STORAGE_KEY))
+      .forEach(k => localStorage.removeItem(k));
+  }
 };
 
+// ========== Shortcuts ==========
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelectorAll(sel);
 
-// ================= NAVIGATION =================
+// ========== Navigation ==========
 $$(".nav-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const target = btn.dataset.target;
@@ -23,9 +34,10 @@ $$(".nav-btn").forEach(btn => {
   });
 });
 
-// ================= STATE =================
+// ========== State ==========
 let state = {
-  teams: storage.get("teams"),
+  // ✅ Load teams from registration storage first
+  teams: JSON.parse(localStorage.getItem("teams")) || storage.get("teams", []),
   matches: storage.get("matches"),
   scores: storage.get("scores", {}),
   spirit: storage.get("spirit", {}),
@@ -36,45 +48,15 @@ let state = {
   sessions: storage.get("sessions"),
 };
 
+// ========== Save Function ==========
 function saveAll() {
   for (const k in state) storage.set(k, state[k]);
 }
 
-// ================= TOURNAMENT MANAGEMENT =================
-
-// --- Teams ---
-// ---------- TEAM APPROVAL (Spot Registration + Sample Teams) ----------
-if (!localStorage.getItem(`${STORAGE_KEY}_teams`)) {
-  state.teams = [
-    {
-      name: "Thunder Hawks",
-      coach: "John Mathews",
-      contact: "9876543210",
-      status: "Pending",
-      players: [
-        { playerName: "Arun Kumar", age: 21, bmi: 23.1 },
-        { playerName: "Vijay Menon", age: 22, bmi: 22.4 },
-        { playerName: "Rahul Nair", age: 20, bmi: 24.3 }
-      ]
-    },
-    {
-      name: "Blue Whales",
-      coach: "Suresh Rajan",
-      contact: "9123456789",
-      status: "Pending",
-      players: [
-        { playerName: "Kiran Lal", age: 23, bmi: 21.7 },
-        { playerName: "Manoj Das", age: 22, bmi: 22.1 },
-        { playerName: "Naveen Rao", age: 21, bmi: 23.5 }
-      ]
-    }
-  ];
-  saveAll();
-}
-
+// Remove old default demo teams (no need for sample data)
 let tempPlayers = [];
 
-// ---------- Add Players ----------
+// ========== PLAYER MANAGEMENT ==========
 function renderPlayerList() {
   const list = $("#playerList");
   list.innerHTML = "";
@@ -111,7 +93,7 @@ $("#playerList").addEventListener("click", e => {
   renderPlayerList();
 });
 
-// ---------- Register Team ----------
+// ========== TEAM REGISTRATION ==========
 $("#teamForm").addEventListener("submit", e => {
   e.preventDefault();
   const name = $("#teamNameInput").value.trim();
@@ -131,10 +113,14 @@ $("#teamForm").addEventListener("submit", e => {
   $("#teamForm").reset();
   renderPlayerList();
   renderTeams();
+  updateDropdowns();
   saveAll();
+
+  // 🔄 Also save to registration storage
+  localStorage.setItem("teams", JSON.stringify(state.teams));
 });
 
-// ---------- Display Teams ----------
+// ========== TEAM LIST ==========
 function renderTeams() {
   const list = $("#teamList");
   list.innerHTML = "";
@@ -147,9 +133,9 @@ function renderTeams() {
     const li = document.createElement("li");
     li.innerHTML = `
       <div>
-        <b>${t.name}</b>
-        <span style="color:#6b7280;">(${t.status})</span><br>
-        <small>Coach: ${t.coach}</small>
+        <b>${t.teamName || t.name}</b>
+        <span style="color:#6b7280;">(${t.status || "Pending"})</span><br>
+        <small>Coach: ${t.coachName || t.coach}</small>
       </div>
       <div class="action-group">
         <button class="btn-blue" data-act="view" data-i="${i}">View Details</button>
@@ -161,6 +147,7 @@ function renderTeams() {
   saveAll();
 }
 
+// ✅ Updated event listener with sync fix
 $("#teamList").addEventListener("click", e => {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -170,30 +157,41 @@ $("#teamList").addEventListener("click", e => {
   if (act === "view") return showTeamDetails(state.teams[i]);
   if (act === "accept") state.teams[i].status = "Accepted";
   if (act === "reject") state.teams[i].status = "Rejected";
+
+  // 🔄 Sync with registration storage
+  localStorage.setItem("teams", JSON.stringify(state.teams));
+
   renderTeams();
+  updateDropdowns();
   saveAll();
 });
 
-// ---------- View Details Modal ----------
+// ========== TEAM DETAILS MODAL ==========
 function showTeamDetails(team) {
   const modal = $("#modalOverlay");
   const content = $("#modalContent");
-  const playerRows = team.players.map(p => `
+
+  // For compatibility with both register.html and dashboard-created teams
+  const players = team.players || team.Players || [];
+
+  const playerRows = players.map(p => `
     <tr>
-      <td>${p.playerName}</td>
+      <td>${p.playerName || p.name}</td>
       <td>${p.age}</td>
       <td>${p.bmi}</td>
     </tr>`).join("");
+
   content.innerHTML = `
-    <h2>${team.name}</h2>
-    <p><strong>Coach:</strong> ${team.coach}</p>
-    <p><strong>Contact:</strong> ${team.contact}</p>
+    <h2>${team.teamName || team.name}</h2>
+    <p><strong>Coach:</strong> ${team.coachName || team.coach}</p>
+    <p><strong>Contact:</strong> ${team.contact || team.phone}</p>
     <p><strong>Status:</strong> ${team.status}</p>
     <h3>Players</h3>
     <table class="player-table">
       <tr><th>Name</th><th>Age</th><th>BMI</th></tr>
       ${playerRows}
     </table>`;
+
   modal.classList.remove("hidden");
 }
 
@@ -204,20 +202,16 @@ $("#modalOverlay").addEventListener("click", e => {
   if (e.target.id === "modalOverlay") $("#modalOverlay").classList.add("hidden");
 });
 
-
-
-
-
-// --- Matches ---
+// ========== MATCHES, SCORES, ETC. ==========
 function renderMatches() {
   const list = $("#matchList");
   list.innerHTML = "";
   if (!state.matches.length) return (list.innerHTML = "<li>No matches</li>");
   state.matches.forEach((m, i) => {
     list.innerHTML += `<li>${m.home} vs ${m.away} - ${m.details}
-    <div class="action-group">
-      <button class="btn-red" data-act="deleteMatch" data-i="${i}">Delete</button>
-    </div></li>`;
+      <div class="action-group">
+        <button class="btn-red" data-act="deleteMatch" data-i="${i}">Delete</button>
+      </div></li>`;
   });
 }
 
@@ -243,241 +237,19 @@ $("#matchList").addEventListener("click", e => {
   }
 });
 
-// --- Scores ---
-function renderScores() {
-  const board = $("#scoreboard");
-  board.innerHTML = "";
-  const entries = Object.entries(state.scores);
-  if (!entries.length) return (board.innerHTML = "<p>No scores yet.</p>");
-  entries.forEach(([team, score]) => {
-    board.innerHTML += `<p>${team}: <b>${score}</b></p>`;
-  });
-}
-
-$("#scoreForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const team = $("#scoreTeamDropdown").value;
-  const score = Number($("#scoreValueInput").value);
-  if (!team) return alert("Select a team");
-  state.scores[team] = score;
-  renderScores();
-  saveAll();
-});
-
-$("#resetScoresBtn").addEventListener("click", () => {
-  if (confirm("Reset all scores?")) {
-    state.scores = {};
-    renderScores();
-    saveAll();
-  }
-});
-
-// --- Spirit Leaderboard ---
-function renderSpirit() {
-  const list = $("#leaderboard");
-  list.innerHTML = "";
-  const entries = Object.entries(state.spirit);
-  if (!entries.length) return (list.innerHTML = "<li>No data</li>");
-  entries.sort((a, b) => b[1] - a[1]);
-  entries.forEach(([team, points]) => (list.innerHTML += `<li>${team}: ${points} pts</li>`));
-}
-
-$("#spiritForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const team = $("#spiritTeamDropdown").value;
-  const points = Number($("#spiritPointsInput").value);
-  if (!team) return;
-  state.spirit[team] = (state.spirit[team] || 0) + points;
-  renderSpirit();
-  saveAll();
-});
-
-$("#resetSpiritBtn").addEventListener("click", () => {
-  if (confirm("Reset points?")) {
-    state.spirit = {};
-    renderSpirit();
-    saveAll();
-  }
-});
-
-// --- Announcements ---
-function renderAnnouncements() {
-  const list = $("#announcementList");
-  list.innerHTML = "";
-  if (!state.announcements.length) return (list.innerHTML = "<li>No announcements</li>");
-  state.announcements.forEach((a, i) => {
-    list.innerHTML += `<li>${a}<button class="btn-red" data-i="${i}">Delete</button></li>`;
-  });
-}
-
-$("#announcementForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const text = $("#announcementText").value.trim();
-  if (!text) return;
-  state.announcements.push(text);
-  $("#announcementForm").reset();
-  renderAnnouncements();
-  saveAll();
-});
-
-$("#announcementList").addEventListener("click", e => {
-  const btn = e.target.closest("button");
-  if (!btn) return;
-  state.announcements.splice(btn.dataset.i, 1);
-  renderAnnouncements();
-  saveAll();
-});
-
-$("#clearAnnouncements").addEventListener("click", () => {
-  if (confirm("Clear all announcements?")) {
-    state.announcements = [];
-    renderAnnouncements();
-    saveAll();
-  }
-});
-
-// --- Gallery ---
-function renderGallery() {
-  const div = $("#gallery");
-  div.innerHTML = "";
-  if (!state.gallery.length) return (div.innerHTML = "<p>No photos</p>");
-  state.gallery.forEach((img, i) => {
-    div.innerHTML += `<div><img src="${img}" alt=""><button class="btn-red" data-i="${i}">✕</button></div>`;
-  });
-}
-
-$("#uploadPhotoBtn").addEventListener("click", () => {
-  const file = $("#photoUpload").files[0];
-  if (!file) return alert("Select an image");
-  const reader = new FileReader();
-  reader.onload = e => {
-    state.gallery.push(e.target.result);
-    renderGallery();
-    saveAll();
-  };
-  reader.readAsDataURL(file);
-});
-
-$("#gallery").addEventListener("click", e => {
-  const btn = e.target.closest("button");
-  if (!btn) return;
-  state.gallery.splice(btn.dataset.i, 1);
-  renderGallery();
-  saveAll();
-});
-
-$("#clearGalleryBtn").addEventListener("click", () => {
-  if (confirm("Clear gallery?")) {
-    state.gallery = [];
-    renderGallery();
-    saveAll();
-  }
-});
-
-// --- Dropdowns ---
+// ========== DROPDOWNS ==========
 function updateDropdowns() {
-  const approved = state.teams.filter(t => t.status === "Approved").map(t => t.name);
-  const all = state.teams.map(t => t.name);
+  const all = state.teams.map(t => t.teamName || t.name);
   $("#teamDropdown").innerHTML = all.map(t => `<option>${t}</option>`).join("");
   $("#scoreTeamDropdown").innerHTML = all.map(t => `<option>${t}</option>`).join("");
   $("#spiritTeamDropdown").innerHTML = all.map(t => `<option>${t}</option>`).join("");
 }
 
-// ================= COACHING PROGRAMME =================
-
-// --- Children ---
-function renderChildren() {
-  const list = $("#childList");
-  list.innerHTML = "";
-  if (!state.children.length) return (list.innerHTML = "<li>No children</li>");
-  state.children.forEach((c, i) => {
-    list.innerHTML += `<li>${c.name} - ${c.attendance} days
-    <div class="action-group">
-      <button class="btn-green" data-act="mark" data-i="${i}">Mark</button>
-      <button class="btn-red" data-act="remove" data-i="${i}">Remove</button>
-    </div></li>`;
-  });
-}
-
-$("#childForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const name = $("#childName").value.trim();
-  if (!name) return;
-  state.children.push({ name, attendance: 0 });
-  $("#childForm").reset();
-  renderChildren();
-  saveAll();
-});
-
-$("#childList").addEventListener("click", e => {
-  const btn = e.target.closest("button");
-  if (!btn) return;
-  const i = btn.dataset.i;
-  if (btn.dataset.act === "mark") state.children[i].attendance++;
-  if (btn.dataset.act === "remove") state.children.splice(i, 1);
-  renderChildren();
-  saveAll();
-});
-
-// --- Visits ---
-function renderVisits() {
-  const list = $("#visitList");
-  list.innerHTML = "";
-  if (!state.visits.length) return (list.innerHTML = "<li>No visits</li>");
-  state.visits.forEach(v => (list.innerHTML += `<li>${v}</li>`));
-}
-
-$("#visitForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const note = $("#visitNotes").value.trim();
-  if (!note) return;
-  state.visits.push(note);
-  $("#visitForm").reset();
-  renderVisits();
-  saveAll();
-});
-
-// --- Sessions ---
-function renderSessions() {
-  const list = $("#sessionList");
-  list.innerHTML = "";
-  if (!state.sessions.length) return (list.innerHTML = "<li>No sessions</li>");
-  state.sessions.forEach(s => (list.innerHTML += `<li>${s.coach}: ${s.details}</li>`));
-}
-
-$("#sessionForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const coach = $("#coachName").value.trim();
-  const details = $("#sessionDetails").value.trim();
-  if (!coach || !details) return;
-  state.sessions.push({ coach, details });
-  $("#sessionForm").reset();
-  renderSessions();
-  saveAll();
-});
-
-// --- Report ---
-$("#generateReport").addEventListener("click", () => {
-  const totalChildren = state.children.length;
-  const totalSessions = state.sessions.length;
-  const avgAttendance = totalChildren ? (state.children.reduce((a, c) => a + c.attendance, 0) / totalChildren).toFixed(1) : 0;
-  $("#reportOutput").textContent = `📊 Coaching Report
-Total Children: ${totalChildren}
-Total Sessions: ${totalSessions}
-Average Attendance: ${avgAttendance} days`;
-});
-
-// ================= INIT =================
+// ========== INIT ==========
 function init() {
   renderTeams();
   renderMatches();
-  renderScores();
-  renderSpirit();
-  renderAnnouncements();
-  renderGallery();
-  renderChildren();
-  renderVisits();
-  renderSessions();
+  renderPlayerList();
   updateDropdowns();
 }
 

@@ -191,39 +191,37 @@
   }
 
   function loginTeam() {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const captchaInput = document.getElementById("captchaInput").value.trim();
-  const captchaCode = document.getElementById("captcha").textContent.trim();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const captchaInput = document.getElementById("captchaInput").value.trim();
+    const captchaCode = document.getElementById("captcha").textContent.trim();
 
-  if (!username || !password || !captchaInput) {
-    alert("⚠️ Please fill in all fields (Name, Password, and Captcha).");
-    return;
+    if (!username || !password || !captchaInput) {
+      alert("⚠️ Please fill in all fields (Name, Password, and Captcha).");
+      return;
+    }
+
+    if (captchaInput.toUpperCase() !== captchaCode.toUpperCase()) {
+      alert("❌ Invalid Captcha. Please try again.");
+      generateCaptcha();
+      document.getElementById("captchaInput").value = "";
+      return;
+    }
+
+    // Get all registered teams from localStorage
+    const teams = JSON.parse(localStorage.getItem("teams")) || [];
+
+    // Find the matching team by name & password
+    const found = teams.find(t => t.teamName === username && t.password === password);
+
+    if (found) {
+      alert(`✅ Welcome ${found.teamName}! Redirecting to your dashboard...`);
+      // Redirect with team name as URL parameter (no localStorage persistence)
+      window.location.href = `index.html?team=${encodeURIComponent(found.teamName)}`;
+    } else {
+      alert("❌ Invalid team name or password.");
+    }
   }
-
-  if (captchaInput.toUpperCase() !== captchaCode.toUpperCase()) {
-    alert("❌ Invalid Captcha. Please try again.");
-    generateCaptcha();
-    document.getElementById("captchaInput").value = "";
-    return;
-  }
-
-  // 🧩 Get all registered teams from localStorage
-  const teams = JSON.parse(localStorage.getItem("teams")) || [];
-
-  // 🔍 Find the matching team by name & password
-  const found = teams.find(t => t.teamName === username && t.password === password);
-
-  if (found) {
-    // ✅ Store the *full team object* so dashboard can use it
-    localStorage.setItem("currentTeam", JSON.stringify(found));
-
-    alert(`✅ Welcome ${found.teamName}! Redirecting to your dashboard...`);
-    window.location.href = "index.html"; // Go to the Team Dashboard
-  } else {
-    alert("❌ Invalid team name or password.");
-  }
-}
 
   // Generate captcha when page loads
   window.onload = generateCaptcha;

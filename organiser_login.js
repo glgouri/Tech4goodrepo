@@ -1,23 +1,31 @@
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizer Login</title>
+  <link rel="stylesheet" href="organiser_login_style.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Organizer Login</h2>
+    <form action="organiser_dashboard.html" method="POST">
+  <div class="input-box">
+    <label for="name">Organizer Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required />
+  </div>
+  <div class="input-box">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+  </div>
+  <button type="submit">Login</button>
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+  <!-- ✅ New Homepage Button -->
+  <button type="button" onclick="window.location.href='homepage.html'">
+    Home
+  </button>
+</form>
 
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error || !data.user) {
-      alert("Login failed: " + (error?.message || "Invalid credentials."));
-    } else {
-      alert("Login successful!");
-      window.location.href = "organiser_dashboard.html";
-    }
-  } catch (err) {
-    console.error("Unexpected error:", err);
-    alert("Something went wrong. Please try again.");
-  }
-});
+  </div>
+</body>
+</html>
