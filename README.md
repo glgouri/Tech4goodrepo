@@ -6,6 +6,7 @@ The system enables both team participants and organizers to interact seamlessly 
 
 Key Features
 <br>
+<br>
 For Teams
 <br>
 <ul>
@@ -14,7 +15,6 @@ For Teams
   <li>View team approval status.</li>
   <li>If rejected, edit or update team/player information and resubmit.</li>
   <li>If accepted, the team details become read-only to maintain data integrity.</li>
-  <li></li>
   <br>
 For Organizers
 <br>
@@ -88,8 +88,9 @@ UI Pages
   <li>🧑‍💼 Organizer Login: For admin access</li>
   <li>📊 Organizer Dashboard: Approve/reject registered teams</li>
 </ul>
-
-
+<br>
+<br>
+<br>
 Future Enhancements
 <br>
 <li>Email notifications for acceptance/rejection</li>
