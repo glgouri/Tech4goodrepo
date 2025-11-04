@@ -301,3 +301,18 @@ button:hover {
   background:#475569;
   border-radius:4px;
 }
+
+/* -------- LOGOUT BUTTON -------- */
+.logout-btn {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  margin-left: 1rem;
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
